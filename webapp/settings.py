@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_*pf!3tn$y257-k4aj^%ue4x_6z(+#05c$mn^vo$(iw8kwk)+a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    "www.bloodborne.shop",
     "101.200.226.141"
 ]
 
