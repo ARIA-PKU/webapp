@@ -1,5 +1,5 @@
 class AcGameMenu {
-    constructor(root, OS) {
+    constructor(root) {
         this.root = root;
         this.$menu = $(`
 <div class="ac-game-menu">
@@ -13,12 +13,11 @@ class AcGameMenu {
         </div>
         <br>
         <div class="ac-game-menu-field-item ac-game-menu-field-item-settings">
-            设置
+            退出
         </div>
     </div>
 </div>
 `);
-        this.OS = OS; // 记录登录平台，便于后续多平台拓展
         this.$menu.hide();
         this.root.$ac_game.append(this.$menu);
         this.$single_mode = this.$menu.find('.ac-game-menu-field-item-single-mode');
@@ -43,6 +42,7 @@ class AcGameMenu {
         });
         this.$settings.click(function () {
             console.log("click settings");
+            outer.root.settings.logout_on_remote();
         });
     }
 

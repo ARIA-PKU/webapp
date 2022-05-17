@@ -1,10 +1,10 @@
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 
 
-def signout(request):  //request是django語法糖
+def signout(request):
     user = request.user
-    if not user.is_authenticated:  //未登錄也直接返回success
+    if not user.is_authenticated:
         return JsonResponse({
             'result': "success",
         })

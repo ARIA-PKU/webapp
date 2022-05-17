@@ -34,7 +34,7 @@ class Settings {
         </div>
         <br>
         <div class="ac-game-settings-acwing">
-            <img width="30" src="https://app165.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
+            <img width="30" src="https://app701.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
             <br>
             <div>
                 AcWing一键登录
@@ -72,7 +72,7 @@ class Settings {
         </div>
         <br>
         <div class="ac-game-settings-acwing">
-            <img width="30" src="https://app165.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
+            <img width="30" src="https://app701.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
             <br>
             <div>
                 AcWing一键登录
@@ -143,7 +143,7 @@ class Settings {
         this.$login_error_message.empty();
 
         $.ajax({
-            url: "http://101.200.226.141:8000/settings/login/",
+            url: "https://app701.acapp.acwing.com.cn/settings/login/",
             type: "GET",
             data: {
                 username: username,
@@ -168,7 +168,7 @@ class Settings {
         this.$register_error_message.empty();
 
         $.ajax({
-            url: "http://101.200.226.141:8000/settings/register/",
+            url: "https://app701.acapp.acwing.com.cn/settings/register/",
             type: "GET",
             data: {
                 username: username,
@@ -190,7 +190,7 @@ class Settings {
         if (this.platform === "ACAPP") return false;
 
         $.ajax({
-            url: "http://101.200.226.141:8000/settings/logout/",
+            url: "https://app701.acapp.acwing.com.cn/settings/logout/",
             type: "GET",
             success: function (resp) {
                 console.log(resp);
@@ -215,7 +215,7 @@ class Settings {
         let outer = this;
 
         $.ajax({
-            url: "http://101.200.226.141:8000/settings/getinfo/",
+            url: "https://app701.acapp.acwing.com.cn/settings/getinfo/",
             type: "GET",
             data: {
                 platform: outer.platform,

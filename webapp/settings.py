@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-_*pf!3tn$y257-k4aj^%ue4x_6z(+#05c$mn^vo$(iw8kwk)+a
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    "app701.acapp.acwing.com.cn",
     "www.bloodborne.shop",
     "101.200.226.141"
 ]
@@ -131,3 +132,14 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CACHES = { 
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },  
+    },  
+}
+USER_AGENTS_CACHE = 'default'
