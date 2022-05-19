@@ -25,13 +25,8 @@ def getinfo_web(request): # 在网页端时的getinfo
 
 def getinfo(request): # 每个处理请求的函数都要有这个参数'request'
     platform = request.GET.get('platform')
-    # print(platform)
-    # return JsonResponse({
-    #     'result': platform,
-    # })
     # 路由
     if platform == "ACAPP": 
         return getinfo_acapp(request)
     elif platform == "WEB": 
-        print("web")
         return getinfo_web(request)
