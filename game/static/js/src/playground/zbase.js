@@ -14,12 +14,28 @@ class AcGamePlayground {
         return colors[Math.floor(Math.random() * 5)];
     }
 
+    create_uuid() {
+        let res = "";
+        for (let i = 0; i < 8; i++) {
+            let x = parseInt(Math.floor(Math.random() * 10));   //[0, 10)
+            res += x;
+        }
+        return res;
+    }
     start() {
         let outer = this;
-        $(window).resize(function () {
+        let uuid = this.create_uuid();
+        $(window).on(`resize.${uuid}`, function () {
             outer.resize();
         });
+
+        if (this.root.AcWingOS) {  // 只针对app端的修改，web端不影响
+            outer.root.AcWingOS.api.window.on_close(function () {
+                $(window).off(`resize.${uuid}`);
+            });
+        }
     }
+
 
     resize() {
         this.width = this.$playground.width();
@@ -41,6 +57,7 @@ class AcGamePlayground {
         this.mode = mode;
         this.state = "waiting";  // waiting -> fighting -> over
         this.notice_board = new NoticeBoard(this);
+        this.score_board = new ScoreBoard(this);
         this.player_count = 0;
 
         this.resize();
@@ -65,6 +82,27 @@ class AcGamePlayground {
     }
 
     hide() {  // 关闭playground界面
+        while (this.players && this.players.length > 0) {
+            this.players[0].destroy();
+        }
+
+        if (this.game_map) {
+            this.game_map.destroy();
+            this.game_map = null;
+        }
+
+        if (this.notice_board) {
+            this.notice_board.destroy();
+            this.notice_board = null;
+        }
+
+        if (this.score_board) {
+            this.score_board.destroy();
+            this.score_board = null;
+        }
+
+        this.$playground.empty();
+
         this.$playground.hide();
     }
 }

@@ -1,8 +1,6 @@
 class Player extends AcGameObject {
     constructor(playground, x, y, radius, color, speed, character, username, photo) {
 
-        console.log(character, username, photo);
-
         super();
         this.playground = playground;
         this.ctx = this.playground.game_map.ctx;
@@ -112,7 +110,6 @@ class Player extends AcGameObject {
 
             if (e.which === 13) {   // enter (显示对话框)
                 if (outer.playground.mode === "multi mode") {
-                    console.log("open chat field");
                     outer.playground.chat_field.show_input();
                     return false;
                 }
@@ -226,11 +223,20 @@ class Player extends AcGameObject {
     update() {
         this.spent_time += this.timedelta / 1000;
 
+        this.update_win();
+
         if (this.character === "me" && this.playground.state === "fighting") {
             this.update_coldtime();
         }
         this.update_move();
         this.render();
+    }
+
+    update_win() {
+        if (this.playground.state === "fighting" && this.character === "me" && this.playground.players.length === 1) {
+            this.playground.state = "over";
+            this.playground.score_board.win();
+        }
     }
 
     update_coldtime() {  // 更新冷却时间
@@ -341,6 +347,12 @@ class Player extends AcGameObject {
 
 
     on_destroy() {
+        if (this.character === "me") {
+            if (this.playground.state === "fighting") {
+                this.playground.state = "over";
+                this.playground.score_board.lose();
+            }
+        }
         for (let i = 0; i < this.playground.players.length; i++) {
             if (this.playground.players[i] === this) {
                 this.playground.players.splice(i, 1);

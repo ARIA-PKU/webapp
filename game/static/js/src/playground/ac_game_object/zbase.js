@@ -30,6 +30,10 @@ class AcGameObject {
         // 每一帧都会执行的过程
     }
 
+    late_update() {
+        // 每一帧最后执行一次
+    }
+
     destroy() {
         this.on_destroy();
         // 删除这个元素
@@ -61,6 +65,12 @@ let AC_GAME_ANIMATION = function (timestp) // timestp 是传入的一个参数�
             obj.update(); // 不断调用
         }
     }
+
+    for (let i = 0; i < AC_GAME_OBJECTS.length; i++) {  // 每帧最后调用
+        let obj = AC_GAME_OBJECTS[i];
+        obj.late_update();
+    }
+
     last_timestp = timestp; // 进入下一帧时当前时间戳就是这一帧的时间戳
 
     requestAnimationFrame(AC_GAME_ANIMATION); // 不断递归调用
